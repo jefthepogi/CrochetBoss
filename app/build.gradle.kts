@@ -18,13 +18,31 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            // Evaluates if the build is running on GitHub (CI) or your local machine
+            val isCI = System.getenv("CI") == "true"
+
+            storeFile = if (isCI) file("keystore/release.jks") else file("../local-key.jks")
+            storePassword = System.getenv("SIGNING_STORE_PASSWORD") ?: "local_password"
+            keyAlias = System.getenv("SIGNING_KEY_ALIAS") ?: "local_alias"
+            keyPassword = System.getenv("SIGNING_KEY_PASSWORD") ?: "local_password"
+        }
+    }
+
     buildTypes {
-        release {
+        getByName("debug") {
+            // Uses built-in Android debug keys automatically
+            applicationIdSuffix = ".debug"
+            isDebuggable = true
+        }
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
