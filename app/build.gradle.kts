@@ -1,6 +1,6 @@
-plugins {
+    plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+//    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
 
@@ -8,7 +8,7 @@ java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(21))
         // Change vendor from JetBrains to a standard distributed OpenJDK
-        vendor.set(JvmVendorSpec.AZUL) // Or JvmVendorSpec.ADOPTIUM
+        vendor.set(JvmVendorSpec.AZUL) // NOTE: Also changed the target JVM within settings
     }
 }
 
@@ -79,9 +79,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-}
-kotlin {
-    compilerOptions {
-        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
-    }
 }
