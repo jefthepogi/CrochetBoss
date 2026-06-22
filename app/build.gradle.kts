@@ -4,6 +4,14 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+        // Change vendor from JetBrains to a standard distributed OpenJDK
+        vendor.set(JvmVendorSpec.ADOPTIUM) // Or JvmVendorSpec.AZUL
+    }
+}
+
 android {
     namespace = "com.example.crochetboss"
     compileSdk = 37
@@ -16,14 +24,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(21))
-            // Change vendor from JetBrains to a standard distributed OpenJDK
-            vendor.set(JvmVendorSpec.ADOPTIUM) // Or JvmVendorSpec.AZUL
-        }
     }
 
     signingConfigs {
