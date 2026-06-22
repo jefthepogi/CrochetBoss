@@ -8,7 +8,7 @@ java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(21))
         // Change vendor from JetBrains to a standard distributed OpenJDK
-        vendor.set(JvmVendorSpec.ADOPTIUM) // Or JvmVendorSpec.AZUL
+        vendor.set(JvmVendorSpec.AZUL) // Or JvmVendorSpec.ADOPTIUM
     }
 }
 
