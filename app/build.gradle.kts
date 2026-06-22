@@ -18,6 +18,14 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(21))
+            // Change vendor from JetBrains to a standard distributed OpenJDK
+            vendor.set(JvmVendorSpec.ADOPTIUM) // Or JvmVendorSpec.AZUL
+        }
+    }
+
     signingConfigs {
         create("release") {
             // Evaluates if the build is running on GitHub (CI) or your local machine
